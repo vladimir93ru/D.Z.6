@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 100
+
+int main() {
+	char str[MAX];
+	char* token;
+
+	fgets(str, MAX, stdin);
+
+	token = strtok(str, " \n");
+	int count = 0;
+
+	while (token!= NULL) {
+		if (count % 2 == 0) {
+			printf("%s ", token);
+		}
+		token = strtok(NULL, " \n");
+		count++;
+	}
+
+	return 0;
+}
