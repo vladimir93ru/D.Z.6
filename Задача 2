@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Структура для узла дерева
+typedef struct Node {
+	int data;
+	struct Node* left;
+	struct Node* right;
+} Node;
+
+// Функция для создания нового узла
+Node* createNode(int data) {
+	Node* newNode = (Node*) malloc(sizeof(Node));
+	if (!newNode) {
+		printf("Memory allocation error\n");
+		return NULL;
+	}
+	newNode->data = data;
+	newNode->left = newNode->right = NULL;
+	return newNode;
+}
+
+// Функция для вычисления суммы всех элементов в дереве
+int sumOfElements(Node* root) {
+	if (root == NULL)
+		return 0;
+	return root->data + sumOfElements(root->left) + sumOfElements(root->right);
+}
+
+int main() {
+	// Создание дерева
+	Node* root = createNode(10);
+	root->left = createNode(5);
+	root->right = createNode(15);
+	root->left->left = createNode(3);
+	root->left->right = createNode(7);
+	root->right->left = createNode(13);
+	root->right->right = createNode(18);
+	root->left->left->left = createNode(1);
+	root->left->right->left = createNode(6);
+
+	// Вычисление суммы всех элементов
+	int sum = sumOfElements(root);
+	printf("%d\n", sum);
+
+	return 0;
+}
